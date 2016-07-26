@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
+    <script type="text/javascript" src="/libs/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="/libs/semantic/semantic.min.js"></script>
+    <style>   
+        body{ 
+            padding-top:5%; 
+            background-color: #DADADA;
+        }
+    </style>
+    <script type="text/javascript">
+    $(function(){
+        var formValues = $form.form('get values');
+        console.log(formValues);
+        $('#form1').form({
+            Date:{
+                identifier: 'Date',
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: 'Please Fill in Date'
+                    }   
+                ]
+            },
+            Location:{
+                identifier: 'Location',
+                rules: [
+                    {
+                        type: 'empty',
+                        prompt: 'Please Fill in Date'
+                    }
+                ]
+            }
+            icLB:{
+                identifier: 'icLB',
+                rules:[
+                    {
+                        type: 
+                        prompt: 'wtf', 
+                    }
+                ]
+            }
+        }, {
+            onSuccess: function(e){
+                e.preventDefault();
+            }
+        });
+
+    });
+</script>
+</head>
+<body class="container">
+    <div class="ui fixed borderless stackable menu">
+        <div class="ui red container">
+          <a href="/" class="header item"><img src="/images/absolute.png" alt="HTML5 Icon"></a>
+          <a href="/profile" class="item">Profile</a>
+          <a href="/showSales" class="item">Sales</a>
+          <a href="/Inventory" class="item">Inventory</a>
+          <a href="/updateInfo" class="right aligned item">Update Account Information</a>
+          <a href="/logout" class="right aligned item">Logout</a>
+        </div>
+    </div>
+    <div class="ui text container">
+      <div class="ui center aligned huge red header">
+        Add Inventory
+      </div>
+    <form action="/updateInventory" method="post" class="ui large equal width form" id="form1">
+    <div class="ui left aligned segment">
+        <h3 class="ui dividing header">Event Information</h3>
+        <div class ="four fields">
+            <div class="required field">
+                <label>Date</label>
+                <input type="date" name="Date">
+            </div>
+            <div class="required field">
+                <label>Location Code</label>
+                <input type="text" name="Location" placeholder="Location Code">
+            </div>
+            <div class="required field">
+                <label>Location Type</label>
+                <select type="text" name ="Type" class="ui search dropdown">
+                    <option value="Events">Events</option>
+                    <option value="Streets">Streets</option>
+                </select>
+            </div>
+            <div class="required field">
+                <label>Shift</label>
+                <select type="text" name ="Shift" class="ui search dropdown">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                </select>
+            </div>
+        </div>
+        <h3 class="ui dividing header">IC Information</h3>
+        <div class="two fields">
+            <div class="required field">
+                <label>ID</label>
+                <input type="text" name="icID" placeholder="ID" value="<%=user.local.username%>">
+            </div>
+            <div class="field">
+                <label>Laurelle Bag</label>
+                <input type="text" name="icLB" placeholder="Laurelle Bag">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>KPI</label>
+            <div class="twelve wide field">
+                <input type="number" name="icDemo" placeholder="Demo">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="icClose" placeholder="Close">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="icUpSale" placeholder="UpSale">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="icDownSale" placeholder="DownSale">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>MG</label>
+            <div class="twelve wide field">
+                <input type="number" name="icMG" placeholder="MG">
+            </div>
+            <label>DP</label>
+            <div class="twelve wide field">
+                <input type="number" name="icDP" placeholder="DP">
+            </div>
+            <label>CG</label>
+            <div class="twelve wide field">
+                <input type="number" name="icCG" placeholder="CG">
+            </div>
+            <label>IO</label>
+            <div class="twelve wide field">
+                <input type="number" name="icIO" placeholder="IO">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>SY</label>
+            <div class="twelve wide field">
+                <input type="number" name="icSY" placeholder="SY">
+            </div>
+            <label>RO</label>
+            <div class="twelve wide field">
+                <input type="number" name="icRO" placeholder="RO">
+            </div>
+            <label>TB</label>
+            <div class="twelve wide field">
+                <input type="number" name="icTB" placeholder="TB">
+            </div>
+            <label>EDT</label>
+            <div class="twelve wide field">
+                <input type="number" name="icEDT" placeholder="EDT">
+            </div>
+        </div>
+        <div class ="two fields">
+            <div class="required field">
+                <label>Cash Value</label>
+                <input type="number" name="icCash" placeholder="Cash Value">
+            </div>
+            <div class="required field">
+                <label>Nets Value</label>
+                <input type="number" name="icNets" placeholder="Nets Value">
+            </div>
+        </div>
+        <h3 class="ui dividing header">Team Member 1 Information</h3>
+        <div class="two fields">
+            <div class="required field">
+                <label>ID</label>
+                <input type="text" name="ID1" placeholder="ID">
+            </div>
+            <div class="field">
+                <label>Laurelle Bag</label>
+                <input type="text" name="LB1" placeholder="LB">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>KPI</label>
+            <div class="twelve wide field">
+                <input type="number" name="Demo1" placeholder="Demo">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="Close1" placeholder="Close">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="UpSale1" placeholder="UpSale">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="DownSale1" placeholder="DownSale">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>MG</label>
+            <div class="twelve wide field">
+                <input type="number" name="MG1" placeholder="MG">
+            </div>
+            <label>DP</label>
+            <div class="twelve wide field">
+                <input type="number" name="DP1" placeholder="DP">
+            </div>
+            <label>CG</label>
+            <div class="twelve wide field">
+                <input type="number" name="CG1" placeholder="CG">
+            </div>
+            <label>IO</label>
+            <div class="twelve wide field">
+                <input type="number" name="IO1" placeholder="IO">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>SY</label>
+            <div class="twelve wide field">
+                <input type="number" name="SY1" placeholder="SY">
+            </div>
+            <label>RO</label>
+            <div class="twelve wide field">
+                <input type="number" name="RO1" placeholder="RO">
+            </div>
+            <label>TB</label>
+            <div class="twelve wide field">
+                <input type="number" name="TB1" placeholder="TB">
+            </div>
+            <label>EDT</label>
+            <div class="twelve wide field">
+                <input type="number" name="EDT1" placeholder="EDT">
+            </div>
+        </div>
+        <div class ="two fields">
+            <div class="required field">
+                <label>Cash Value</label>
+                <input type="number" name="Cash1" placeholder="Cash Value">
+            </div>
+            <div class="required field">
+                <label>Nets Value</label>
+                <input type="number" name="Nets1" placeholder="Nets Value">
+            </div>
+        </div>
+        <h3 class="ui dividing header">Team Member 2 Information</h3>
+        <div class="two fields">
+            <div class="required field">
+                <label>ID</label>
+                <input type="text" name="ID2" placeholder="ID">
+            </div>
+            <div class="field">
+                <label>Laurelle Bag</label>
+                <input type="text" name="LB2" placeholder="LB">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>KPI</label>
+            <div class="twelve wide field">
+                <input type="number" name="Demo2" placeholder="Demo">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="Close2" placeholder="Close">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="UpSale2" placeholder="UpSale">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="DownSale2" placeholder="DownSale">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>MG</label>
+            <div class="twelve wide field">
+                <input type="number" name="MG2" placeholder="MG">
+            </div>
+            <label>DP</label>
+            <div class="twelve wide field">
+                <input type="number" name="DP2" placeholder="DP">
+            </div>
+            <label>CG</label>
+            <div class="twelve wide field">
+                <input type="number" name="CG2" placeholder="CG">
+            </div>
+            <label>IO</label>
+            <div class="twelve wide field">
+                <input type="number" name="IO2" placeholder="IO">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>SY</label>
+            <div class="twelve wide field">
+                <input type="number" name="SY2" placeholder="SY">
+            </div>
+            <label>RO</label>
+            <div class="twelve wide field">
+                <input type="number" name="RO2" placeholder="RO">
+            </div>
+            <label>TB</label>
+            <div class="twelve wide field">
+                <input type="number" name="TB2" placeholder="TB">
+            </div>
+            <label>EDT</label>
+            <div class="twelve wide field">
+                <input type="number" name="EDT2" placeholder="EDT">
+            </div>
+        </div>
+        <div class ="two fields">
+            <div class="required field">
+                <label>Cash Value</label>
+                <input type="number" name="Cash2" placeholder="Cash Value">
+            </div>
+            <div class="required field">
+                <label>Nets Value</label>
+                <input type="number" name="Nets2" placeholder="Nets Value">
+            </div>
+        </div>
+        <h3 class="ui dividing header">Team Member 3 Information</h3>
+        <div class="two fields">
+            <div class="required field">
+                <label>ID</label>
+                <input type="text" name="ID3" placeholder="ID">
+            </div>
+            <div class="field">
+                <label>Laurelle Bag</label>
+                <input type="text" name="LB3" placeholder="LB">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>KPI</label>
+            <div class="twelve wide field">
+                <input type="number" name="Demo3" placeholder="Demo">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="Close3" placeholder="Close">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="UpSale3" placeholder="UpSale">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="DownSale3" placeholder="DownSale">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>MG</label>
+            <div class="twelve wide field">
+                <input type="number" name="MG3" placeholder="MG">
+            </div>
+            <label>DP</label>
+            <div class="twelve wide field">
+                <input type="number" name="DP3" placeholder="DP">
+            </div>
+            <label>CG</label>
+            <div class="twelve wide field">
+                <input type="number" name="CG3" placeholder="CG">
+            </div>
+            <label>IO</label>
+            <div class="twelve wide field">
+                <input type="number" name="IO3" placeholder="IO">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>SY</label>
+            <div class="twelve wide field">
+                <input type="number" name="SY3" placeholder="SY">
+            </div>
+            <label>RO</label>
+            <div class="twelve wide field">
+                <input type="number" name="RO3" placeholder="RO">
+            </div>
+            <label>TB</label>
+            <div class="twelve wide field">
+                <input type="number" name="TB3" placeholder="TB">
+            </div>
+            <label>EDT</label>
+            <div class="twelve wide field">
+                <input type="number" name="EDT3" placeholder="EDT">
+            </div>
+        </div>
+        <div class ="two fields">
+            <div class="required field">
+                <label>Cash Value</label>
+                <input type="number" name="Cash3" placeholder="Cash Value">
+            </div>
+            <div class="required field">
+                <label>Nets Value</label>
+                <input type="number" name="Nets3" placeholder="Nets Value">
+            </div>
+        </div>
+        <h3 class="ui dividing header">Team Member 4 Information</h3>
+        <div class="two fields">
+            <div class="required field">
+                <label>ID</label>
+                <input type="text" name="ID4" placeholder="ID">
+            </div>
+            <div class="field">
+                <label>Laurelle Bag</label>
+                <input type="text" name="LB4" placeholder="LB">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>KPI</label>
+            <div class="twelve wide field">
+                <input type="number" name="Demo4" placeholder="Demo">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="Close4" placeholder="Close">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="UpSale4" placeholder="UpSale">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="DownSale4" placeholder="DownSale">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>MG</label>
+            <div class="twelve wide field">
+                <input type="number" name="MG4" placeholder="MG">
+            </div>
+            <label>DP</label>
+            <div class="twelve wide field">
+                <input type="number" name="DP4" placeholder="DP">
+            </div>
+            <label>CG</label>
+            <div class="twelve wide field">
+                <input type="number" name="CG4" placeholder="CG">
+            </div>
+            <label>IO</label>
+            <div class="twelve wide field">
+                <input type="number" name="IO4" placeholder="IO">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>SY</label>
+            <div class="twelve wide field">
+                <input type="number" name="SY4" placeholder="SY">
+            </div>
+            <label>RO</label>
+            <div class="twelve wide field">
+                <input type="number" name="RO4" placeholder="RO">
+            </div>
+            <label>TB</label>
+            <div class="twelve wide field">
+                <input type="number" name="TB4" placeholder="TB">
+            </div>
+            <label>EDT</label>
+            <div class="twelve wide field">
+                <input type="number" name="EDT4" placeholder="EDT">
+            </div>
+        </div>
+        <div class ="two fields">
+            <div class="required field">
+                <label>Cash Value</label>
+                <input type="number" name="Cash4" placeholder="Cash Value">
+            </div>
+            <div class="required field">
+                <label>Nets Value</label>
+                <input type="number" name="Nets4" placeholder="Nets Value">
+            </div>
+        </div>
+           <h3 class="ui dividing header">Team Member 5 Information</h3>
+        <div class="two fields">
+            <div class="required field">
+                <label>ID</label>
+                <input type="text" name="ID5" placeholder="ID">
+            </div>
+            <div class="field">
+                <label>Laurelle Bag</label>
+                <input type="text" name="LB5" placeholder="LB">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>KPI</label>
+            <div class="twelve wide field">
+                <input type="number" name="Demo5" placeholder="Demo">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="Close5" placeholder="Close">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="UpSale5" placeholder="UpSale">
+            </div>
+            <div class="twelve wide field">
+                <input type="number" name="DownSale5" placeholder="DownSale">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>MG</label>
+            <div class="twelve wide field">
+                <input type="number" name="MG5" placeholder="MG">
+            </div>
+            <label>DP</label>
+            <div class="twelve wide field">
+                <input type="number" name="DP5" placeholder="DP">
+            </div>
+            <label>CG</label>
+            <div class="twelve wide field">
+                <input type="number" name="CG5" placeholder="CG">
+            </div>
+            <label>IO</label>
+            <div class="twelve wide field">
+                <input type="number" name="IO5" placeholder="IO">
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>SY</label>
+            <div class="twelve wide field">
+                <input type="number" name="SY5" placeholder="SY">
+            </div>
+            <label>RO</label>
+            <div class="twelve wide field">
+                <input type="number" name="RO5" placeholder="RO">
+            </div>
+            <label>TB</label>
+            <div class="twelve wide field">
+                <input type="number" name="TB5" placeholder="TB">
+            </div>
+            <label>EDT</label>
+            <div class="twelve wide field">
+                <input type="number" name="EDT5" placeholder="EDT">
+            </div>
+        </div>
+        <div class ="two fields">
+            <div class="required field">
+                <label>Cash Value</label>
+                <input type="number" name="Cash5" placeholder="Cash Value">
+            </div>
+            <div class="required field">
+                <label>Nets Value</label>
+                <input type="number" name="Nets5" placeholder="Nets Value">
+            </div>
+        </div>
+        <button class="ui fluid large red submit button" type="submit">Submit</button>
+    </div>
+     <div class="ui error message"></div>
+    </form>
+  </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
+    <script type="text/javascript" src="/libs/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="/libs/semantic/semantic.min.js"></script>
+    <style> body { padding-top:15%; } </style>
+    
+</head>
+<body class = "container">
+	<<div class="ui fixed borderless stackable menu">
+    <div class="ui red container">
+      <a href="/" class="header item"><img src="/images/absolute.png" alt="HTML5 Icon"></a>
+      <a href="/profile" class="item">Profile</a>
+      <a href="/showSales" class="item">Sales</a>
+      <a href="/Inventory" class="item">Inventory</a>
+      <a href="/updateInventory" class="item">Add End Day</a>
+      <a href="/updateInfo" class="right aligned item">Update Account Information</a>
+      <a href="/logout" class="right aligned item">Logout</a>
+    </div>
+  </div>
+  <% if (noAuthorization.length > 0) { %>
+        <div class="ui red message header">
+        <%= noAuthorization %>
+        </div>
+    <% } %> 
+  	<div class="ui middle aligned centered grid">	
+    <div class="column">
+    <!--
+    <div class="column">
+    
+  	<div class="ui link cards">
+  		<div class="card">
+      -->
+    		<div class="image">
+      			<img src="/images/absolute.png" alt="HTML5 Icon">
+    		</div>
+
+
+      <!---
+    		<div class="content">
+      			<div class="header"><%= user.firstName %> <%= user.lastName %></div>
+      			<div class="meta">
+        			<%if(user.jobtitle != ""){ %>
+						  <%=user.jobTitle%>
+					     <% } %>
+      			</div>
+      			<div class="description">
+        		Some Description!
+      			</div>
+   				</div>
+    			<div class="extra content">
+      			<span class="right floated">
+        		Joined in 2013
+      			</span>
+      			<span class="left floated">
+        		<i class="user icon"></i>
+        		75 Friends
+      			</span>
+    			</div>
+  		</div>
+      -->
+	</div>
+	</div>
+	</div>	
+</body>
+</html>

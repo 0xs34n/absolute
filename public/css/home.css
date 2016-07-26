@@ -1,0 +1,131 @@
+*{
+    /*border: 1px solid red !important;*/
+}
+
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.header{   
+	width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    font-family: 'Oswald', sans-serif;
+    background-color: #404040;
+    position: relative;
+    margin: auto;
+
+}
+
+.name{
+	font-size: 50px;
+	font-weight: 100;
+	width: 40%;
+	padding: 2%;
+}
+
+.name a:hover{
+	text-decoration: none;
+}
+
+.button{
+	float: right;
+	font-size: 30px;
+	font-weight: 50;
+	-webkit-transition-duration: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+	margin: 0;
+	padding-top: 4%;
+	padding-left: 2%;
+	padding-right: 2%;
+	flex-wrap: wrap;
+}
+
+.button:hover{
+	background-color: #000000;
+}
+
+.button a:hover{
+	text-decoration: none;
+}
+
+
+.image{
+	padding-top: 15%;
+	padding-bottom: 15%;
+}
+
+.intro{
+	font-size: 30px;
+	font-family: 'Oswald', sans-serif;
+	padding: 10%;
+	margin: auto;
+}
+
+.container{
+	max-width: 100%;
+	margin: auto;
+}
+
+.info{
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+    background-color: #D8D8D8;
+    position: relative;
+    margin: auto;
+ }
+
+.col-1{
+	width: 8.33%;
+}
+
+.col-2{
+	width: 16.66%;
+}
+
+.col-3{
+	width: 25%;
+}
+
+.col-4{
+	width: 33.33%;
+}
+
+.col-5{
+	width: 41.66%;
+}
+
+.col-6{
+	width: 50%;
+}
+
+.col-7{
+	width: 58.33%;
+}
+
+.col-8{
+	width: 66.66%;
+}
+
+.col-9{
+	width: 75%;
+}
+
+.col-10{
+	width: 83.33%;
+}
+
+.col-11{
+	width: 91.66%;
+}
+
+.col-12{
+	width: 100%;
+}

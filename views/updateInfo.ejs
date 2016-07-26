@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Info</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
+    <link rel="javascript" type="text/javascript" href="/libs/jquery-3.0.0.min.js">
+    <link rel="javascript" type="text/javascript" href="/libs/semantic/semantic.min.js">
+    <link rel="javascript" type="text/javascript" href="/libs/semantic/validation.js">
+    <style> 
+        body{ 
+            padding-top:5%; 
+            background-color: #DADADA;
+        }
+    </style>
+</head>
+<body class="container">
+        <div class="ui fixed borderless stackable menu">
+            <div class="ui red container">
+              <a href="/" class="header item"> Absolute </a>
+              <a href="/profile" class="item">Profile</a>
+              <a href="/showSales" class="item">Sales</a>
+              <a href="/Inventory" class="item">Inventory</a>
+              <a href="/updateInfo" class="right aligned item">Update Account Information</a>
+              <a href="/logout" class="right aligned item">Logout</a>
+            </div> 
+        </div>
+    <div class="ui text container">
+      <div class="ui center aligned huge red header">
+        Update Information
+      </div>
+    <% if (message.length > 0) { %>
+        <div class="ui red message header">
+        <%= message %>
+        </div>
+    <% }; %>
+    <form class="ui large form" action="/updateInfo" method="post">
+    <div class="ui left aligned segment">
+        <h4 class="ui dividing header">Personal Information</h4>
+        <div class="field">
+            <label>&nbsp&nbsp&nbspID</label>
+            <input type="text" name="ID" placeholder="ID">
+        </div>
+        <div class="three fields">
+            <div class="field">
+                <label>&nbsp&nbsp&nbspFirst Name</label>
+                <input type="text" name="firstName" placeholder="First Name">
+            </div>
+            <div class="field">
+                <label>&nbsp&nbsp&nbspLast Name</label>
+                <input type="text" name="lastName" placeholder="Last Name">
+            </div>
+            <div class="field">
+                <label>Gender</label>
+                <select class="ui dropdown" type="text" name="Gender">
+                    <option value=""></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
+        <div class="three fields">
+            <div class="field">
+                <label>&nbsp&nbsp&nbspNationality</label>
+                <input type="text" name="Nationality" placeholder="Nationality">
+            </div>
+            <div class="field">
+                <label>&nbsp&nbsp&nbspEmail</label>
+                <input type="text" name="Email" placeholder="Email">
+            </div>
+            <div class="field">
+                <label>&nbsp&nbsp&nbspMobile No.</label>
+                <input type="number" name="mobileNumber" placeholder="Mobile No.">
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label>&nbsp&nbsp&nbspTrainer ID</label>
+                <input type="text" name="trainerID" placeholder="Trainer ID">
+            </div>
+            <% if(accounts.Master==false){%>
+            <div class="disabled field">
+            <% } else{ %>
+            <div class="field">
+            <% };%>
+                <label>&nbsp&nbsp&nbspDesignation</label>
+                <input type="text" name="Designation" placeholder="Designation">
+            </div>
+                    </div>
+        <% if(accounts.Designation=="Field Representative"){%>
+            <div class="two disabled fields">
+        <% } else{ %>
+            <div class="two fields">
+        <% };%>
+            <div class="field">
+                <label>&nbsp&nbsp&nbspTeam Name</label>
+                <input type="text" name="teamName" placeholder="Team Name">
+            </div>
+            <div class="field">
+                <label>&nbsp&nbsp&nbspTeam Tagline</label>
+                <input type="text" name="teamTag" placeholder="Team Tagline">
+            </div>
+        </div>
+         <div class="three fields">
+            <% if(accounts.IC==false){%>
+            <div class="disabled field">
+                <label>IC (No Authorization)</label>
+                <select class="ui dropdown" type="text" name="IC">
+                    <option value=""></option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <% } else{ %>
+            <div class="field">
+                <label>IC</label>
+                <select class="ui dropdown" type="text" name="IC">
+                    <option value=""></option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <% };%>
+            <% if(accounts.Manager==false){%>
+            <div class="disabled field">
+                <label>Manager (No Authorization)</label>
+                <select class="ui dropdown" type="text" name="Manager">
+                </select>
+            </div>
+            <% } else{ %>
+            <div class="field">
+                <label>Manager</label>
+                <select class="ui dropdown" type="text" name="Manager">
+                    <option value=""></option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <% };%>
+            <% if(accounts.Master==false){ %> 
+            <div class="disabled field">
+                <label>Master (No Authorization)</label>
+                <select class="ui disabled dropdown" type="text" name="Master">
+                </select>
+            </div>
+            <% } else{ %>
+            <div class="field">
+                <label>Master</label>
+                <select class="ui dropdown" type="text" name="Master">
+                    <option value=""></option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+            <% };%>
+        </div>
+
+        <button class="ui fluid large red submit button" type="submit">Submit</button>
+    </div>
+    </form>
+  </div>
+</div>
+</body>
+
+</html>

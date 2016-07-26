@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>outStocks</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
+    <link rel="javascript" type="text/javascript" href="/libs/jquery-3.0.0.min.js">
+    <link rel="javascript" type="text/javascript" href="/libs/semantic/semantic.min.js">
+    <link rel="javascript" type="text/javascript" href="/libs/semantic/validation.js">
+    <style> 
+        body{ 
+            padding-top:5%; 
+            background-color: #DADADA;
+        }
+    </style>
+</head>
+<body class="container">
+    <div class="ui fixed borderless stackable menu">
+        <div class="ui red container">
+          <a href="/" class="header item"><img src="/images/absolute.png" alt="HTML5 Icon"></a>
+          <a href="/profile" class="item">Profile</a>
+          <a href="/showSales" class="item">Sales</a>
+          <a href="/Inventory" class="item">Inventory</a>
+          <a href="/updateInfo" class="right aligned item">Update Account Information</a>
+          <a href="/logout" class="right aligned item">Logout</a>
+        </div>
+    </div>
+    <div class="ui text container">
+      <div class="ui center aligned huge red header">
+        Out Stocks
+      </div>
+    <form action="/outStocks" method="post" class="ui large equal width form">
+    <div class="ui left aligned segment">
+        <h3 class="ui dividing header">Stock Removed</h3>
+        <div class ="two fields">
+            <div class="required field">
+                <label>ID</label>
+                <input type="text" name="ID">
+            </div>
+            <div class="required field">
+                <label>Date</label>
+                 <input type="date" name="Date">
+            </div>
+        </div>
+        <div class ="three fields">
+            
+            <div class="required field">
+                <label>Location Code</label>
+                <input type="text" name="Location" placeholder="Location Code">
+            </div>
+            <div class="required field">
+                <label>Location Type</label>
+                <select type="text" name ="Type" class="ui search dropdown">
+                    <option value="Events">Events</option>
+                    <option value="Streets">Streets</option>
+                </select>
+            </div>
+            <div class="required field">
+                <label>Shift</label>
+                <select type="text" name ="Shift" class="ui search dropdown">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                </select>
+            </div>
+        </div>
+        <div class="inline fields">
+            <label>MG</label>
+            <div class="twelve wide field">
+                <input type="number" name="MG" placeholder="MG">
+            </div>
+            <label>DP</label>
+            <div class="twelve wide field">
+                <input type="number" name="DP" placeholder="DP">
+            </div>
+            <label>CG</label>
+            <div class="twelve wide field">
+                <input type="number" name="CG" placeholder="CG">
+            </div>
+            <label>IO</label>
+            <div class="twelve wide field">
+                <input type="number" name="IO" placeholder="IO">
+            </div>
+        </div>
+        <div class="inline five fields">
+            <label>SY</label>
+            <div class="twelve wide field">
+                <input type="number" name="SY" placeholder="SY">
+            </div>
+            <label>RO</label>
+            <div class="twelve wide field">
+                <input type="number" name="RO" placeholder="RO">
+            </div>
+            <label>TB</label>
+            <div class="twelve wide field">
+                <input type="number" name="TB" placeholder="TB">
+            </div>
+            <label>EDT</label>
+            <div class="twelve wide field">
+                <input type="number" name="EDT" placeholder="EDT">
+            </div>
+            <label>LB</label>
+            <div class="twelve wide field">
+                <input type="number" name="LB" placeholder="LB">
+            </div>
+        </div>
+        <button class="ui fluid large red submit button" type="submit">Submit</button>
+    </div>
+    </form>
+  </div>
+</div>
+</body>
+
+</html>

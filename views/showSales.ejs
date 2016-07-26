@@ -1,0 +1,113 @@
+<!-- views/pages/home.ejs -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile Page</title>
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
+        <link rel="javascript" type="text/javascript" href="/libs/jquery-3.0.0.min.js">
+        <link rel="javascript" type="text/javascript" href="/libs/semantic/semantic.min.js">
+        <link rel="javascript" type="text/javascript" href="/libs/semantic/validation.js">
+        <style> body { padding-top:15%; } </style>
+    </head>
+    <body>
+        <div class="ui fixed borderless stackable menu">
+        <div class="ui red container">
+          <a href="/" class="header item"><img src="/images/absolute.png" alt="HTML5 Icon"></a>
+          <a href="/profile" class="item">Profile</a>
+          <a href="/showSales" class="item">Sales</a>
+          <a href="/Inventory" class="item">Inventory</a>
+          <a href="/updateInfo" class="right aligned item">Update Account Information</a>
+          <a href="/logout" class="right aligned item">Logout</a>
+        </div>
+        </div>
+        <div class="ui centered grid">
+            <table class="ui basic collapsing compact celled table">
+            <thead class="full-width">
+                <tr>
+                    <th></th>
+                    <th>
+                        <form action="/showSales" method="get">
+                        <div class="ui input">         
+                        <input type="date" name="Date" value="">
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid input">
+                        <label>Type</label>
+                        <select type="text" name ="Type" class="ui search dropdown">
+                        <option value="Events">Events</option>
+                        <option value="Streets">Streets</option>
+                        <option value="Both">Both</option>
+                        </select>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui fluid input">
+                        <label>Shift</label>
+                        <select type="text" name ="Shift" class="ui search dropdown">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                        <option value="SS">SS</option>
+                        <option value="All">All</option>
+                        </select>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="ui input">
+                        <input type="text" name="Location" placeholder="Location Code">
+                        </div>
+                    </th>
+                    <th>
+                        <label>KPI</label>
+                        <div class="ui fluid inline input">
+                            <input type="number" name="Demo" placeholder="Demo">
+                            <input type="number" name="Close" placeholder="Close">
+                            <input type="number" name="UpSale" placeholder="UpSale">
+                            <input type="number" name="DownSale" placeholder="DownSale">
+                        </div>
+                    </th>
+                    <th>
+                        <button class="ui right floated tiny red submit button" type="submit">Search</button></form>
+                    </th>
+                </tr>
+                    <form method = "post" class = "form" action = "/deleteSales">
+                    <%sales.forEach(function(sales){ %>
+                    <tr>
+                    <td class="collapsing">
+                        <div class="ui fitted slider checkbox">
+                        <input type="checkbox" name="deleteThis" value="<%=sales._id%>"><label></label>
+                        </div>
+                    </td>
+                    <td><%=sales.Date%></td>
+                    <td><%=sales.Type%></td>
+                    <td><%=sales.Shift%></td>
+                    <td><%=sales.Location%></td>
+                    <td><%=sales.Demo%>-<%=sales.Close%>-<%=sales.UpSale%>-<%=sales.DownSale%></td>
+                    </tr>
+                    <% }); %>
+                    </form>
+
+            </thead>
+            <tfoot class="full-width">
+                <tr>
+                <th colspan="7"><button class="ui tiny red submit button" type = "submit">DELETE</button></th>
+                <th colspan="4"><a href="/addSales"><div class="ui right floated small primary labeled icon button"><i class="shopping icon"></i>Add Sales
+        </div>
+        </a>
+      </th>
+                </tr>
+
+            </tfoot>
+            </table>
+        </div>
+
+
+        
+     
+
+        
+    </body>
+
+</html>

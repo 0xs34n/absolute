@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HighRoll!!</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
+    <link rel="javascript" type="text/javascript" href="/libs/jquery-3.0.0.min.js">
+    <link rel="javascript" type="text/javascript" href="/libs/semantic/semantic.min.js">      
+    <link rel="javascript" type="text/javascript" href="/libs/semantic/validation.js">
+    <style> 
+      body { 
+        padding-top:15%; 
+        background-color: #DADADA;
+      } 
+    </style>
+</head>
+
+<body class="container">
+    <div>
+    <div class="ui middle aligned center aligned grid">
+    <div class="column">
+    <h2 class="ui red huge header">
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <% if (message.length > 0) { %>
+        <div class="ui red message header">
+        <%= message %>
+        </div>
+    <% } %>
+    <form action="/" method="post" class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" class = "form-control" name="username" placeholder="Employee ID">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" class = "form-control" name="password" placeholder="Password">
+          </div>
+        </div>
+        <button type = "submit" class="ui fluid large red submit button"> Login </button>
+      </div>
+    </form>
+    <div class="ui segment">
+       Don't have an Account? <a href="/signup">&nbspSign Up</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
