@@ -1,4 +1,3 @@
 module.exports = {
-
-	'url': 'mongodb://localhost/highroll'
+	'url': 'mongodb://localhost/absolute'
 };

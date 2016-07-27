@@ -13,44 +13,6 @@
         }
     </style>
     <script type="text/javascript">
-    $(function(){
-        var formValues = $form.form('get values');
-        console.log(formValues);
-        $('#form1').form({
-            Date:{
-                identifier: 'Date',
-                rules: [
-                    {
-                        type: 'empty',
-                        prompt: 'Please Fill in Date'
-                    }   
-                ]
-            },
-            Location:{
-                identifier: 'Location',
-                rules: [
-                    {
-                        type: 'empty',
-                        prompt: 'Please Fill in Date'
-                    }
-                ]
-            }
-            icLB:{
-                identifier: 'icLB',
-                rules:[
-                    {
-                        type: 
-                        prompt: 'wtf', 
-                    }
-                ]
-            }
-        }, {
-            onSuccess: function(e){
-                e.preventDefault();
-            }
-        });
-
-    });
 </script>
 </head>
 <body class="container">
@@ -68,7 +30,7 @@
       <div class="ui center aligned huge red header">
         Add Inventory
       </div>
-    <form action="/updateInventory" method="post" class="ui large equal width form" id="form1">
+    <form action="/inventory/addEndDay" method="post" class="ui large equal width form" id="form1">
     <div class="ui left aligned segment">
         <h3 class="ui dividing header">Event Information</h3>
         <div class ="four fields">
@@ -99,7 +61,7 @@
         <div class="two fields">
             <div class="required field">
                 <label>ID</label>
-                <input type="text" name="icID" placeholder="ID" value="<%=user.local.username%>">
+                <input type="text" name="icID" placeholder="ID">
             </div>
             <div class="field">
                 <label>Laurelle Bag</label>

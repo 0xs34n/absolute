@@ -171,30 +171,30 @@
       
       <td></td><td></td><td></td><th></th>
     </tr>
-    <% broughtOut.forEach(function(broughtOut) { %>
+    <% outStocks.forEach(function(outStocks) { %>
     <tr class="center aligned">
       <td>    
         <h4 class="ui right aligned header">
           <div class="content">
             Brought Out
             <% accounts.forEach(function(accounts){ %>
-            <% if(accounts.ID == broughtOut.ID) {%> 
+            <% if(accounts.ID == outStocks.ID) {%> 
             	<div class="sub header"><%=accounts.firstName%></div>
             <% }; });%>
           </div>
         </h4>
       </td>
-      <td> <%=broughtOut.LB%><%outLB +=broughtOut.LB%></td>
-      <td> <%=broughtOut.MG%><%outMG +=broughtOut.MG%></td>
-      <td> <%=broughtOut.DP%><%outDP +=broughtOut.DP%></td>
-      <td> <%=broughtOut.CG%><%outCG +=broughtOut.CG%></td>
-      <td> <%=broughtOut.IO%><%outIO +=broughtOut.IO%></td>
-      <td> <%=broughtOut.SY%><%outSY +=broughtOut.SY%></td>
-      <td> <%=broughtOut.RO%><%outRO +=broughtOut.RO%></td>
-      <td> <%=broughtOut.TB%><%outTB +=broughtOut.TB%></td>
-      <td> <%=broughtOut.EDT%><%outEDT +=broughtOut.EDT%></td>
+      <td> <%=outStocks.LB%></td>
+      <td> <%=outStocks.MG%></td>
+      <td> <%=outStocks.DP%></td>
+      <td> <%=outStocks.CG%></td>
+      <td> <%=outStocks.IO%></td>
+      <td> <%=outStocks.SY%></td>
+      <td> <%=outStocks.RO%></td>
+      <td> <%=outStocks.TB%></td>
+      <td> <%=outStocks.EDT%></td>
       <td></td><td></td>
-      <td><form method = "post" class = "form" action = "/deleteStocks"><button class="ui tiny red submit button" name="deleteStocks" value="<%=broughtOut._id%>" type="submit">DELETE</button></form>
+      <td><form method = "post" class = "form" action = "/deleteStocks"><button class="ui tiny red submit button" name="deleteStocks" value="<%=outStocks._id%>" type="submit">DELETE</button></form>
       </td>  
       <td></td>
     </tr>
@@ -204,48 +204,23 @@
         <h4 class="ui right aligned header">
           <div class="content">
             Closing
-            <div class="sub header"><%=broughtOut.ID%></div>
+            <div class="sub header"><%=outStocks.ID%></div>
           </div>
         </h4>
       </td>
-      <td> <%=leftStocks.LB-outLB%></td>
-      <td> <%=leftStocks.MG-outMG%></td>
-      <td> <%=leftStocks.DP-outDP%></td>
-      <td> <%=leftStocks.CG-outCG%></td>
-      <td> <%=leftStocks.IO-outIO%></td>
-      <td> <%=leftStocks.SY-outSY%></td>
-      <td> <%=leftStocks.RO-outRO%></td>
-      <td> <%=leftStocks.TB-outTB%></td>
-      <td> <%=leftStocks.EDT-outEDT%></td>  
+      <td> <%=closing.LB%></td>
+      <td> <%=closing.MG%></td>
+      <td> <%=closing.DP%></td>
+      <td> <%=closing.CG%></td>
+      <td> <%=closing.IO%></td>
+      <td> <%=closing.SY%></td>
+      <td> <%=closing.RO%></td>
+      <td> <%=closing.TB%></td>
+      <td> <%=closing.EDT%></td>  
       <td></td>
       <td></td><td></td><td></td>
     </tr>
-    <% broughtOut.forEach(function(broughtOut) { %>
-      <%eventLB=0%>
-      <%eventMG=0%>
-      <%eventDP=0%>
-      <%eventCG=0%>
-      <%eventIO=0%>
-      <%eventSY=0%>
-      <%eventRO=0%>
-      <%eventTB=0%>        
-      <%eventEDT=0%>   
-      <%eventCash=0%>
-      <%eventNets=0%>
-      <% sales.forEach(function(sales) { %>
-      <% if(sales.icID == broughtOut.ID) {%>
-        <%eventLB += sales.LB%>
-        <%eventMG += sales.MG%>
-        <%eventDP += sales.DP%>
-        <%eventCG += sales.CG%>
-        <%eventIO += sales.IO%>
-        <%eventSY += sales.SY%>
-        <%eventRO += sales.RO%>
-        <%eventTB += sales.TB%>
-        <%eventEDT += sales.EDT%>    
-        <%eventCash += sales.Cash%>
-        <%eventNets += sales.Nets%>
-      <% }; });%>
+    <% eventSold.forEach(function(eventSold) { %>
     <tr class="center aligned">
       <td>
         <form method = "post" class = "form" action = "/deleteSalesInv">
@@ -253,33 +228,31 @@
           <div class="content">
             Sold
             <% accounts.forEach(function(accounts){ %>
-            <% if(accounts.ID == broughtOut.ID) {%> 
+            <% if(accounts.ID == eventSold.icID) {%> 
             	<div class="sub header"><%=accounts.firstName%></div>
             <% }; });%>
-            <div class="sub header">Location: <%=broughtOut.Location%></div>
-            <div class="ui button popz" data-content="LB: <%=broughtOut.LB-eventLB%> MG: <%=broughtOut.MG-eventMG%> DP: <%=broughtOut.DP-eventDP%> CG: <%=broughtOut.CG-eventCG%> IO: <%=broughtOut.IO-eventIO%> SY: <%=broughtOut.SY-eventSY%> RO: <%=broughtOut.RO-eventRO%> TB: <%=broughtOut.TB-eventTB%> EDT: <%=broughtOut.EDT-eventEDT%>">LeftOver</div>
+            <div class="sub header">Location: <%=eventSold.Location%></div>
             <div class="ui button team">Team Info</div>
           </div>
         </h4>
       </td>
-      
-      <td> <%=eventLB%></td>
-      <td> <%=eventMG%></td>
-      <td> <%=eventDP%></td>
-      <td> <%=eventCG%></td>
-      <td> <%=eventIO%></td>
-      <td> <%=eventSY%></td>
-      <td> <%=eventRO%></td>
-      <td> <%=eventTB%></td>
-      <td> <%=eventEDT%></td>
-      <td> <%=eventCash%></td>
-      <td> <%=eventNets%></td>
-      <td> <%=eventCash+eventNets%></td>
+      <td> <%=eventSold.LB%></td>
+      <td> <%=eventSold.MG%></td>
+      <td> <%=eventSold.DP%></td>
+      <td> <%=eventSold.CG%></td>
+      <td> <%=eventSold.IO%></td>
+      <td> <%=eventSold.SY%></td>
+      <td> <%=eventSold.RO%></td>
+      <td> <%=eventSold.TB%></td>
+      <td> <%=eventSold.EDT%></td>
+      <td> <%=eventSold.Cash%></td>
+      <td> <%=eventSold.Nets%></td>
+      <td> <%=eventSold.Cash+eventSold.Nets%></td>
       <td><button class="ui tiny red submit button" name="deleteSales" value="<%=sales._id%>" type="submit">DELETE</button></td></form>
     </tr>
     <% sales.forEach(function(sales) { %>
     <tr class="p center aligned" style="display: none;">
-      <% if(sales.icID == broughtOut.ID) {%>
+      <% if(sales.icID == eventSold.icID) {%>
       <td>
         <h4 class="ui right aligned header">
           <div class="content">
@@ -314,72 +287,17 @@
           </div>
         </h4>
       </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalLB += sales.LB %>
-        <% }); %>
-        <%= finalLB%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalMG += sales.MG %>
-        <% }); %>
-        <%= finalMG%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalDP += sales.DP %>
-        <% }); %>
-        <%= finalDP%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalCG += sales.CG %>
-        <% }); %>
-        <%= finalCG%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalIO += sales.IO %>
-        <% }); %>
-        <%= finalIO%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalSY += sales.SY %>
-        <% }); %>
-        <%= finalSY%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalRO += sales.RO %>
-        <% }); %>
-        <%= finalRO%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalTB += sales.TB %>
-        <% }); %>
-        <%= finalTB%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalEDT += sales.EDT %>
-        <% }); %>
-        <%= finalEDT%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalCash += sales.Cash %>
-        <% }); %>
-        <%= finalCash%>
-      </td>
-      <td>
-        <% sales.forEach(function(sales) { %>
-          <% finalNets += sales.Nets %>
-        <% }); %>
-        <%= finalNets%>
-      </td>
+      <td><%=totalSold.LB%></td>
+      <td><%=totalSold.MG%></td>
+      <td><%=totalSold.DP%></td>
+      <td><%=totalSold.CG%></td>
+      <td><%=totalSold.IO%></td>
+      <td><%=totalSold.SY%></td>
+      <td><%=totalSold.RO%></td>
+      <td><%=totalSold.TB%></td>
+      <td><%=totalSold.EDT%></td>
+      <td><%=totalSold.Cash%></td>
+      <td><%=totalSold.Nets%></td>
       <td></td><td></td>
     </tr>
     </tr>
@@ -391,41 +309,41 @@
           </div>
         </h4>
       </td>
-      <form action="/addLeftStocks" method="post" class="ui mini">
-      <td><div class="ui fluid input"><input type="text" name="LB" value="<%=leftStocks.LB-finalLB%>"></div></td>
-      <td><div class="ui fluid input"><input type="text" name="MG" value="<%=leftStocks.MG-finalMG%>"></div></td>
-      <td><div class="ui fluid input"><input type="text" name="DP" value="<%=leftStocks.DP-finalDP%>"></div></td>
-      <td><div class="ui fluid input"><input type="text" name="CG" value="<%=leftStocks.CG-finalCG%>"></div></td>
-      <td><div class="ui fluid input"><input type="text" name="IO" value="<%=leftStocks.IO-finalIO%>"></div></td>
-      <td><div class="ui fluid input"><input type="text" name="SY" value="<%=leftStocks.SY-finalSY%>"></div></td>
-      <td><div class="ui input"><input type="text" name="RO" value="<%=leftStocks.RO-finalRO%>"></div></td>
-      <td><div class="ui fluid input"><input type="text" name="TB" value="<%=leftStocks.TB-finalTB%>"></div></td>
-      <td><div class="ui fluid input"><input type="text" name="EDT" value="<%=leftStocks.EDT-finalEDT%>"></div></td>     
+      <form action="/inventory/addLeftStocks" method="post" class="ui mini">
+      <td><div class="ui fluid input"><input type="text" name="LB" value="<%=endDayClose.LB%>"></div></td>
+      <td><div class="ui fluid input"><input type="text" name="MG" value="<%=endDayClose.MG%>"></div></td>
+      <td><div class="ui fluid input"><input type="text" name="DP" value="<%=endDayClose.DP%>"></div></td>
+      <td><div class="ui fluid input"><input type="text" name="CG" value="<%=endDayClose.CG%>"></div></td>
+      <td><div class="ui fluid input"><input type="text" name="IO" value="<%=endDayClose.IO%>"></div></td>
+      <td><div class="ui fluid input"><input type="text" name="SY" value="<%=endDayClose.SY%>"></div></td>
+      <td><div class="ui input"><input type="text" name="RO" value="<%=endDayClose.RO%>"></div></td>
+      <td><div class="ui fluid input"><input type="text" name="TB" value="<%=endDayClose.TB%>"></div></td>
+      <td><div class="ui fluid input"><input type="text" name="EDT" value="<%=endDayClose.EDT%>"></div></td>     
       <td>
         <div class="ui fluid input">
-          <input type="text" name="Cash" value="<%=finalCash%>" placeholder="Amount"> 
+          <input type="text" name="Cash" value="<%=endDayClose.Cash%>" placeholder="Amount"> 
         </div>
       </td>
       <td>
         <div class="ui fluid input">
-          <input type="text" name="Nets" value="<%=finalNets%>" placeholder="Amount"> 
+          <input type="text" name="Nets" value="<%=endDayClose.Nets%>" placeholder="Amount"> 
         </div>
       </td>
-      <td><%=finalCash+finalNets%></td><td></td>
+      <td><%=endDayClose.Cash+endDayClose.Nets%></td><td></td>
     </tr>
     
   </tbody>
   <tfoot class="full-width">
     <tr>
       <th colspan="4">
-        <a href="/outStocks">
+        <a href="/inventory/AddOutStocks">
         <div class="ui right floated small primary labeled icon button">
           <i class="user icon"></i>Add Out Stock
         </div>
         </a>
       </th>
       <th colspan="4">
-        <a href="/updateInventory">
+        <a href="/inventory/addEndDay">
         <div class="ui right floated small primary labeled icon button">
           <i class="user icon"></i>Add End Day
         </div>

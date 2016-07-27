@@ -29,12 +29,7 @@
       <div class="ui center aligned huge red header">
         Update Information
       </div>
-    <% if (message.length > 0) { %>
-        <div class="ui red message header">
-        <%= message %>
-        </div>
-    <% }; %>
-    <form class="ui large form" action="/updateInfo" method="post">
+    <form class="ui large form" action="/accounts/updateInfo" method="post">
     <div class="ui left aligned segment">
         <h4 class="ui dividing header">Personal Information</h4>
         <div class="field">
@@ -70,7 +65,7 @@
             </div>
             <div class="field">
                 <label>&nbsp&nbsp&nbspMobile No.</label>
-                <input type="number" name="mobileNumber" placeholder="Mobile No.">
+                <input type="number" name="mNumber" placeholder="Mobile No.">
             </div>
         </div>
         <div class="two fields">
@@ -78,20 +73,20 @@
                 <label>&nbsp&nbsp&nbspTrainer ID</label>
                 <input type="text" name="trainerID" placeholder="Trainer ID">
             </div>
-            <% if(accounts.Master==false){%>
-            <div class="disabled field">
-            <% } else{ %>
+    
             <div class="field">
-            <% };%>
+     
                 <label>&nbsp&nbsp&nbspDesignation</label>
                 <input type="text" name="Designation" placeholder="Designation">
             </div>
                     </div>
-        <% if(accounts.Designation=="Field Representative"){%>
-            <div class="two disabled fields">
-        <% } else{ %>
-            <div class="two fields">
-        <% };%>
+    
+    
+            <div class="three fields">
+            <div class="field">
+                <label>&nbsp&nbsp&nbspSeniorName</label>
+                <input type="text" name="seniorName" placeholder="Senior Team Name">
+            </div>
             <div class="field">
                 <label>&nbsp&nbsp&nbspTeam Name</label>
                 <input type="text" name="teamName" placeholder="Team Name">
@@ -102,16 +97,7 @@
             </div>
         </div>
          <div class="three fields">
-            <% if(accounts.IC==false){%>
-            <div class="disabled field">
-                <label>IC (No Authorization)</label>
-                <select class="ui dropdown" type="text" name="IC">
-                    <option value=""></option>
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                </select>
-            </div>
-            <% } else{ %>
+          
             <div class="field">
                 <label>IC</label>
                 <select class="ui dropdown" type="text" name="IC">
@@ -120,14 +106,7 @@
                     <option value="0">No</option>
                 </select>
             </div>
-            <% };%>
-            <% if(accounts.Manager==false){%>
-            <div class="disabled field">
-                <label>Manager (No Authorization)</label>
-                <select class="ui dropdown" type="text" name="Manager">
-                </select>
-            </div>
-            <% } else{ %>
+       
             <div class="field">
                 <label>Manager</label>
                 <select class="ui dropdown" type="text" name="Manager">
@@ -136,14 +115,7 @@
                     <option value="0">No</option>
                 </select>
             </div>
-            <% };%>
-            <% if(accounts.Master==false){ %> 
-            <div class="disabled field">
-                <label>Master (No Authorization)</label>
-                <select class="ui disabled dropdown" type="text" name="Master">
-                </select>
-            </div>
-            <% } else{ %>
+          
             <div class="field">
                 <label>Master</label>
                 <select class="ui dropdown" type="text" name="Master">
@@ -152,7 +124,7 @@
                     <option value="0">No</option>
                 </select>
             </div>
-            <% };%>
+        
         </div>
 
         <button class="ui fluid large red submit button" type="submit">Submit</button>

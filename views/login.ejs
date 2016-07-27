@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HighRoll!!</title>
+    <title>Absolute</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
-    <link rel="javascript" type="text/javascript" href="/libs/jquery-3.0.0.min.js">
-    <link rel="javascript" type="text/javascript" href="/libs/semantic/semantic.min.js">      
-    <link rel="javascript" type="text/javascript" href="/libs/semantic/validation.js">
+    <script type="text/javascript" src="/libs/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="/libs/semantic/semantic.min.js"></script>
     <style> 
       body { 
         padding-top:15%; 
@@ -25,12 +24,7 @@
         Log-in to your account
       </div>
     </h2>
-    <% if (message.length > 0) { %>
-        <div class="ui red message header">
-        <%= message %>
-        </div>
-    <% } %>
-    <form action="/" method="post" class="ui large form">
+    <form action="/users/auth" method="post" class="ui large form">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
