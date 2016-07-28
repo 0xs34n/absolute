@@ -193,8 +193,8 @@
       <td> <%=outStocks.RO%></td>
       <td> <%=outStocks.TB%></td>
       <td> <%=outStocks.EDT%></td>
-      <td></td><td></td>
-      <td><form method = "post" class = "form" action = "/deleteStocks"><button class="ui tiny red submit button" name="deleteStocks" value="<%=outStocks._id%>" type="submit">DELETE</button></form>
+      <td></td><td></td><td></td>
+      <td><form method = "post" class = "form" action = "/inventory/deleteStocks"><button class="ui tiny red submit button" name="deleteStocks" value="<%=outStocks._id%>" type="submit">DELETE</button></form>
       </td>  
       <td></td>
     </tr>
@@ -223,7 +223,6 @@
     <% eventSold.forEach(function(eventSold) { %>
     <tr class="center aligned">
       <td>
-        <form method = "post" class = "form" action = "/deleteSalesInv">
         <h4 class="ui right aligned header">
           <div class="content">
             Sold
@@ -233,6 +232,7 @@
             <% }; });%>
             <div class="sub header">Location: <%=eventSold.Location%></div>
             <div class="ui button team">Team Info</div>
+             <div class="ui button popz" data-content="LB: <%=eventSold.leftLB%> MG: <%=eventSold.leftMG%> DP: <%=eventSold.leftDP%> CG: <%=eventSold.leftCG%> IO: <%=eventSold.leftIO%> SY: <%=eventSold.leftSY%> RO: <%=eventSold.leftRO%> TB: <%=eventSold.leftTB%> EDT: <%=eventSold.leftEDT%>">LeftOver</div>
           </div>
         </h4>
       </td>
@@ -248,11 +248,12 @@
       <td> <%=eventSold.Cash%></td>
       <td> <%=eventSold.Nets%></td>
       <td> <%=eventSold.Cash+eventSold.Nets%></td>
-      <td><button class="ui tiny red submit button" name="deleteSales" value="<%=sales._id%>" type="submit">DELETE</button></td></form>
+      <td></td>
     </tr>
     <% sales.forEach(function(sales) { %>
+    <% if(sales.icID == eventSold.icID) {%>
     <tr class="p center aligned" style="display: none;">
-      <% if(sales.icID == eventSold.icID) {%>
+    <form method = "post" class = "form" action = "/sales/deleteOne">  
       <td>
         <h4 class="ui right aligned header">
           <div class="content">
@@ -274,7 +275,8 @@
       <td><%=sales.EDT%></td>
       <td><%=sales.Cash%></td>
       <td><%=sales.Nets%></td>
-      <td><%=sales.Cash+sales.Nets%></td><td></td>
+      <td><%=sales.Cash+sales.Nets%></td>
+      <td><button class="ui tiny red submit button" name="deleteSales" value="<%=sales._id%>" type="submit">DELETE</button></form></td>
     </tr>
     <% }; });%>
     <% }); %>

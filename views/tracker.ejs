@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Profile Page</title>
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
+        <link rel="javascript" type="text/javascript" href="/libs/jquery-3.0.0.min.js">
+        <link rel="javascript" type="text/javascript" href="/libs/semantic/semantic.min.js">
+        <link rel="javascript" type="text/javascript" href="/libs/semantic/validation.js">
+        <style> body { padding-top:15%; } </style>
+    </head>
+    <body>
+        <div class="ui fixed borderless stackable menu">
+        <div class="ui red container">
+          <a href="/" class="header item"><img src="/images/absolute.png" alt="HTML5 Icon"></a>
+          <a href="/profile" class="item">Profile</a>
+          <a href="/showSales" class="item">Sales</a>
+          <a href="/Inventory" class="item">Inventory</a>
+          <a href="/updateInfo" class="right aligned item">Update Account Information</a>
+          <a href="/logout" class="right aligned item">Logout</a>
+        </div>
+        </div>
+        <div class="ui centered grid">
+        
+            <% sales.forEach(function(sales) {%>
+                <%=sales.Date%><br>
+
+            <% });%>
+
+        </div>
+
+
+        
+     
+
+        
+    </body>
+
+</html>

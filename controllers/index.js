@@ -5,6 +5,7 @@ router.use('/inventory', require('./inventory'));
 router.use('/sales', require('./sales'));
 router.use('/users', require('./users'));
 router.use('/accounts', require('./accounts'));
+router.use('/tracker', require('./tracker'));
 
 router.get('/', function(req, res){
 	res.render('./login');

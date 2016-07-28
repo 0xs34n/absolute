@@ -39,105 +39,23 @@ exports.create = function(ID, firstName, lastName, Designation, trainerID, teamN
             Manager: Manager,
             Master: Master
 	};
-   	accounts.update({ID: ID}, {ID: ID}, {upsert: true}, function(err, raw){
-                    if (err) return handleError(err);
-                    console.log('The raw response from Mongo was ', raw);
+    var newAccount = new accounts(item);
+    newAccount.save(function(err, data){
+        if(err) {
+            console.log(err);
+            return res.status(500).send();
+        };
     });
-    if(firstName != "")
-    {
-    	accounts.update({ID: ID}, {firstName: firstName}, function(err, raw){
-        	if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });
-    };
-    if(lastName != "")
-    {
-        accounts.update({ID: ID}, {lastName: lastName}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });
-    };
-    if(Designation != "")
-    {
-        accounts.update({ID: ID}, {Designation: Designation}, function(err, raw){
-        	if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });
-    };
-    if(trainerID != "")
-    {
-        accounts.update({ID: ID}, {trainerID: trainerID}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });     
-    };
-    if(teamName != "")
-    {
-        accounts.update({ID: ID}, {teamName: teamName}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });
-    };
-    if(teamTag != "")
-    {
-        accounts.update({ID: ID}, {teamTag: teamTag}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });    
-    };
-    if(Nationality != "")
-    {
-        accounts.update({ID: ID}, {Nationality: Nationality}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });    
-    };
-    if(Email != "")
-    {
-        accounts.update({ID: ID}, {Email: Email}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });    
-    };
-    if(mNumber != "")
-    {
-        accounts.update({ID: ID}, {mobileNumber: mNumber}, function(err, raw){
-        if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });    
-    };
-    if(IC != "")
-    {
-        accounts.update({ID: ID}, {IC: IC}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });    
-    };
-    if(Manager != "")
-    {
-        accounts.update({ID: ID}, {Manager: Manager}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });    
-    };
-    if(Master != "")
-    {
-        accounts.update({ID: ID}, {Master: Master}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });    
-    };
-    if(Gender != "")
-    {
-        accounts.update({ID: ID}, {Gender: Gender}, function(err, raw){
-            if (err) return handleError(err);
-            console.log('The raw response from Mongo was ', raw);
-        });    
-    };   
 };
 
+//Returns array of distinct value
+exports.getDistinct = function(value){
+    accounts.distinct(value, function(err, doc){
+        if (err) return cb(err);
+        cb(null, docs);
+    })
+};
 
-			
 
 //Get a account by ID, returns single object
 exports.get = function(ID, cb) {
@@ -154,5 +72,10 @@ exports.all = function(cb) {
 		cb(null, docs);
 	});
 }
+
+exports.delete = function(id, cb){
+
+
+};
 
 

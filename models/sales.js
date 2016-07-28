@@ -68,7 +68,64 @@ exports.getDate = function(currentDate, cb){
     currentDate = currentDate.substring(0,10);
 	sales.find({Date: currentDate}, function(err, docs){
 		if (err) return cb(err);
-				cb(null, docs);
+			cb(null, docs);
 	});
 };
+
+exports.getDateRange = function(startDate, endDate, cb){
+	var startYear = startDate.getFullYear();
+	var startMonth = startDate.getMonth();
+	var startDay = startDate.getDate();
+	var endYear = endDate.getFullYear();
+	var endMonth = endDate.getMonth();
+	var endDay = endDate.getDate()+1;         //Add to until end of the day
+	sales.find({Date: {"$gte": new Date(startYear, startMonth, startDay), "$lt": new Date(endYear, endMonth, endDay)}}, function(err, docs){
+		if (err) return cb(err);
+			cb(null, docs);
+	});
+};
+
+//Search for sales with conditons given, returns array
+exports.search = function(conditions, cb){
+	sales.find(conditions, function(err, docs){
+        if (err) return cb(err);
+		cb(null, docs);
+    });
+};
+
+//Delete one sales based on mongodb stored id
+exports.deleteOne = function(id, cb){
+	sales.remove({_id: id}, function(err){
+        if (err) return cb(err);
+        cb(null);
+    });
+};
+
+//Delete an array of sales id (mongodb id)
+exports.deleteArray = function(id, cb){
+	var idLength = id.length;
+	for(var x = 0; x < idLength; x++)
+	{
+		sales.remove({_id: id[x]}, function(err){
+			if (err) return cb(err);
+        	cb(null);
+		});
+	};	
+};
+
+exports.agg = function(cb){
+	sales.aggregate([
+		{$project:{dayOfWeek: {$dayOfWeek:"$Date"}}},
+	], function(err, data){
+		console.log(data);
+	});
+};
+
+exports.test = function(cb){
+	sales.find({Date: {$dayOfWeek: 4}}, function(err, docs){
+		if (err) return cb(err);
+		cb(null, docs)
+	});
+};
+
 

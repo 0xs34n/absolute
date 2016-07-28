@@ -5,6 +5,7 @@ var leftStocks = require('../models/leftStocks');
 var sales = require('../models/sales');
 var outStocks = require('../models/outStocks');
 
+
 //Display Table of Inventory, authorization: IC
 router.get('/', function(req, res){  
 	if(req.param("invDate")!=undefined)
@@ -20,14 +21,26 @@ router.get('/', function(req, res){
     searchDate.setTime(searchDate.getTime() + 28800000);
     searchDate = searchDate.toISOString();
     searchDate = searchDate.substring(0,10);
-    var eventSold = {icID: "", Location: "", LB:0, MG:0, DP:0, CG:0, IO:0, SY:0, RO:0, TB:0, EDT:0, Cash:0, Nets:0};
-    var finalEvent =[];
-    var totalSold = {LB:0, MG:0, DP:0, CG:0, IO:0, SY:0, RO:0, TB:0, EDT:0, Cash:0, Nets:0}
-    var endDayClose = {LB:0, MG:0, DP:0, CG:0, IO:0, SY:0, RO:0, TB:0, EDT:0, Cash:0, Nets:0}
+    var eventSold = {icID: "", Location: "", LB:0, MG:0, DP:0, CG:0, IO:0, SY:0, RO:0, TB:0, EDT:0, Cash:0, Nets:0, leftLB:0, leftMG:0, leftDP:0, leftCG:0, leftIO:0, leftSY:0, leftRO:0, leftTB:0, leftEDT:0};
+    var finalEvent = [];
+    var totalSold = {LB:0, MG:0, DP:0, CG:0, IO:0, SY:0, RO:0, TB:0, EDT:0, Cash:0, Nets:0};
+    var endDayClose = {LB:0, MG:0, DP:0, CG:0, IO:0, SY:0, RO:0, TB:0, EDT:0, Cash:0, Nets:0};
     leftStocks.yestDate(date, function(err, leftStocksYst){   //Find Stocks in store
     	outStocks.get(date, function(err, outStocks){              //Find Stocks that have been moved to field (outStocks)
     		sales.getDate(date, function(err, sales){
                 accounts.all(function(err, accounts){
+                    if(leftStocksYst==null)
+                    {
+                        leftStocksYst = 0;
+                    };
+                    if(outStocks==null)
+                    {
+                        outStocks = 0;
+                    };
+                    if(sales==null)
+                    {
+                        sales = 0;
+                    };
                     var closing = {LB:leftStocksYst.LB, MG:leftStocksYst.MG, DP:leftStocksYst.DP, CG:leftStocksYst.CG, IO:leftStocksYst.IO, SY:leftStocksYst.SY, RO:leftStocksYst.RO, TB:leftStocksYst.TB, EDT:leftStocksYst.EDT};
                     var outStocksLength = outStocks.length;
                     for (var i=0; i<outStocksLength; i++)
@@ -71,8 +84,17 @@ router.get('/', function(req, res){
                         totalSold.EDT += eventSold.EDT;
                         totalSold.Cash += eventSold.Cash;
                         totalSold.Nets += eventSold.Nets;
+                        eventSold.leftLB = outStocks[i].LB - eventSold.LB; 
+                        eventSold.leftMG = outStocks[i].MG - eventSold.MG;
+                        eventSold.leftDP = outStocks[i].DP - eventSold.DP;
+                        eventSold.leftCG = outStocks[i].CG - eventSold.CG;
+                        eventSold.leftIO = outStocks[i].IO - eventSold.IO;
+                        eventSold.leftSY = outStocks[i].SY - eventSold.SY;
+                        eventSold.leftRO = outStocks[i].RO - eventSold.RO;
+                        eventSold.leftTB = outStocks[i].TB - eventSold.TB;
+                        eventSold.leftEDT = outStocks[i].EDT - eventSold.EDT;
                         finalEvent.push(eventSold);
-                        eventSold = {icID: "", Location: "", LB:0, MG:0, DP:0, CG:0, IO:0, SY:0, RO:0, TB:0, EDT:0, Cash:0, Nets:0};  
+                        eventSold = {icID: "", Location: "", LB:0, MG:0, DP:0, CG:0, IO:0, SY:0, RO:0, TB:0, EDT:0, Cash:0, Nets:0, leftLB:0, leftMG:0, leftDP:0, leftCG:0, leftIO:0, leftSY:0, leftRO:0, leftTB:0, leftEDT:0};  
                     };
                     endDayClose.LB = leftStocksYst.LB - totalSold.LB;
                     endDayClose.MG = leftStocksYst.MG - totalSold.MG;
@@ -85,6 +107,7 @@ router.get('/', function(req, res){
                     endDayClose.EDT = leftStocksYst.EDT - totalSold.EDT;
                     endDayClose.Cash = totalSold.Cash;
                     endDayClose.Nets = totalSold.Nets;
+                    
                     res.render('./inventory', {date: searchDate, leftStocks: leftStocksYst, outStocks: outStocks, sales: sales, accounts: accounts, closing: closing, eventSold: finalEvent, totalSold: totalSold, endDayClose: endDayClose});
     			});
     		});
@@ -125,5 +148,15 @@ router.post('/addEndDay', function(req, res){
 	if(req.body.ID5 != ""){sales.create(req.body.ID5, req.body.icID, req.body.Date, req.body.Type, req.body.Shift, req.body.Location, req.body.Demo5, req.body.Close5, req.body.UpSale5, req.body.DownSale5, req.body.LB5, req.body.MG5, req.body.DP5, req.body.CG5, req.body.IO5, req.body.SY5, req.body.RO5, req.body.TB5, req.body.EDT5, req.body.Cash5, req.body.Nets5)};
 	res.redirect('./');
 });
+
+router.post('/deleteStocks', function(req, res){
+    outStocks.delete(req.body.deleteStocks, function(err){
+        if(err) {
+            console.log(err);
+            return res.status(500).send();
+        };
+    })
+    res.redirect('/inventory');
+})
 
 module.exports = router;

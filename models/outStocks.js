@@ -55,3 +55,11 @@ exports.get = function(currentDate, cb) {
 		cb(null, docs);
 	});
 };
+
+exports.delete = function(id, cb){
+    outStocks.remove({_id: id}, function(err){
+        if (err) return cb(err);
+        cb(null);
+    });     
+};
+
