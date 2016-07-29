@@ -46,14 +46,31 @@ exports.create = function(ID, Location, Date, Shift, LB, MG, DP, CG, IO, SY, RO,
 };
 
 //Get a outStocks by date, returns array of outStocks on that date
-exports.get = function(currentDate, cb) {
-    currentDate.setTime(currentDate.getTime() + 28800000);    //Add to take into account time zone
-    currentDate = currentDate.toISOString();
-    currentDate = currentDate.substring(0,10);
-	outStocks.find({Date: currentDate}, function(err, docs){
-		if (err) return cb(err);
-		cb(null, docs);
-	});
+exports.get = function(date, cb) {
+    outStocks.aggregate([
+        {$project: {ID:1, Date:1, Shift:1, Location:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1}},
+        {$match: {Date: date}},
+        {$lookup: {from:"accounts", localField:"ID", foreignField:"ID", as: "accounts"}},
+        {$unwind: {path:"$accounts"}},
+        {$project: {ID:1, Date:1, Shift:1, Location:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, "accounts.firstName": 1, "accounts.lastName": 1}}
+    ], function(err, data){
+        if (err) return cb(err);
+        cb(null, data);
+    });
+};
+
+//Returns outStocks from Date of ID
+exports.getWithID = function(date, ID, cb) {
+    outStocks.aggregate([
+        {$project: {ID:1, Date:1, Shift:1, Location:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1}},
+        {$match: {Date: date, ID: ID}},
+        {$lookup: {from:"accounts", localField:"ID", foreignField:"ID", as: "accounts"}},
+        {$unwind: {path:"$accounts"}},
+        {$project: {ID:1, Date:1, Shift:1, Location:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, "accounts.firstName": 1, "accounts.lastName": 1}}
+    ], function(err, data){
+        if (err) return cb(err);
+        cb(null, data);
+    });
 };
 
 exports.delete = function(id, cb){

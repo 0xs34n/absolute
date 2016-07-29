@@ -24,6 +24,7 @@ var accounts = mongoose.model("accounts", accountsSchema);
 //Create a new Account or update if account exists in database
 exports.create = function(ID, firstName, lastName, Designation, trainerID, teamName, teamTag, seniorTeam, Gender, Email, Nationality, mNumber, IC, Manager, Master){
 	var item = {
+			ID: ID,
             firstName: firstName,
             lastName: lastName,
             Designation: Designation,
@@ -77,5 +78,21 @@ exports.delete = function(id, cb){
 
 
 };
+
+exports.agg = function(seniorTeam, cb){
+	accounts.aggregate([
+		{$project:{ _id: 0, seniorTeam: 1, ID: 1, firstName: 1, lastName: 1}},
+		{$match: {seniorTeam: seniorTeam}},
+		{$sort: {ID: 1, Date: 1}},
+		{$lookup: {from:"sales", localField:"ID", foreignField:"ID", as: "sales"}},
+		{$unwind: {path: "$sales"}}
+
+	], function(err, docs){
+		if (err) return cb(err);
+		cb(null, docs);
+	});
+};
+
+
 
 

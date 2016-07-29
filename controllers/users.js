@@ -3,6 +3,8 @@ var router   = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/user');
 
+
+/*
 router.post('/newuser', function(req, res){
 	var newUser = new User({
 		username: req.body.username,
@@ -41,6 +43,6 @@ router.post('/auth', function(req, res){
         }
 	})
 });
-
+*/
 
 module.exports = router;

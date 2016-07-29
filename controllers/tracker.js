@@ -3,7 +3,7 @@ var router   = express.Router();
 var accounts = require('../models/accounts');
 var sales = require('../models/sales');
 	
-
+/*
 router.get('/', function(req, res){
 	var todayDate = new Date();
 	var todayDay = todayDate.getDay();
@@ -21,10 +21,13 @@ router.get('/', function(req, res){
 	else if(todayDay==4)
 		todayDate.setDate(todayDate.getDate()-6);
 	endDate.setDate(todayDate.getDate()+7);
-	sales.getDateRange(todayDate, endDate, function(err, sales){
-		console.log(sales);
-		res.render('./tracker', {startDate: todayDate, endDate: endDate, sales: sales});
+	sales.agg(todayDate, endDate, function(err, data){
+		res.render('./tracker', {data: data});
 	})
+
+		
 });
+
+*/
 
 module.exports = router;

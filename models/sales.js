@@ -72,6 +72,46 @@ exports.getDate = function(currentDate, cb){
 	});
 };
 
+exports.getDateWithName = function(date, cb){
+    sales.aggregate([
+    	{$project: {ID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1}},
+    	{$match: {Date: date}},
+    	{$lookup: {from:"accounts", localField:"ID", foreignField:"ID", as: "accounts"}},
+    	{$unwind: {path:"$accounts"}},
+    	{$project: {ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1, "accounts.firstName": 1, "accounts.lastName": 1}}
+	], function(err, data){
+		if (err) return cb(err);
+		cb(null, data);
+	});
+};
+
+exports.getDateWithID = function(date, ID, cb){
+    sales.aggregate([
+    	{$project: {ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1}},
+    	{$match: {Date: date, ID: ID}},
+    	{$lookup: {from:"accounts", localField:"ID", foreignField:"ID", as: "accounts"}},
+    	{$unwind: {path:"$accounts"}},
+    	{$project: {ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1, "accounts.firstName": 1, "accounts.lastName": 1}}
+	], function(err, data){
+		if (err) return cb(err);
+		cb(null, data);
+	});
+};
+
+exports.getDateWithicID = function(date, icID, cb){
+	sales.aggregate([
+    	{$project: {ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1}},
+    	{$match: {Date: date, icID: icID}},
+    	{$lookup: {from:"accounts", localField:"ID", foreignField:"ID", as: "accounts"}},
+    	{$unwind: {path:"$accounts"}},
+    	{$project: {ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1, "accounts.firstName": 1, "accounts.lastName": 1}}
+	], function(err, data){
+		if (err) return cb(err);
+		cb(null, data);
+	});
+
+};
+
 exports.getDateRange = function(startDate, endDate, cb){
 	var startYear = startDate.getFullYear();
 	var startMonth = startDate.getMonth();
@@ -84,6 +124,8 @@ exports.getDateRange = function(startDate, endDate, cb){
 			cb(null, docs);
 	});
 };
+
+
 
 //Search for sales with conditons given, returns array
 exports.search = function(conditions, cb){
@@ -113,13 +155,45 @@ exports.deleteArray = function(id, cb){
 	};	
 };
 
-exports.agg = function(cb){
+exports.findSalesWeek = function(startDate, endDate, cb){
+	var startYear = startDate.getFullYear();
+	var startMonth = startDate.getMonth();
+	var startDay = startDate.getDate();
+	var endYear = endDate.getFullYear();
+	var endMonth = endDate.getMonth();
+	var endDay = endDate.getDate()+1; 
 	sales.aggregate([
-		{$project:{dayOfWeek: {$dayOfWeek:"$Date"}}},
+		{$project:{_id:0, ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1}},
+		{$match: {Date: {"$gte": (new Date(startYear, startMonth, startDay)), "$lt": (new Date(endYear, endMonth, endDay))}}},
+		{$sort: {ID: 1, Date: 1}},
+		{$lookup: {from:"accounts", localField:"ID", foreignField:"ID", as: "accounts"}},
+		{$unwind: {path:"$accounts"}},
+		{$project:{_id:0, ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1, "accounts.firstName":1, "accounts.lastName":1, "accounts.seniorTeam":1 }}
 	], function(err, data){
-		console.log(data);
+		if (err) return cb(err);
+        cb(null, data);
 	});
 };
+
+exports.findSalesWeekID = function(startDate, endDate, ID, cb){
+	var startYear = startDate.getFullYear();
+	var startMonth = startDate.getMonth();
+	var startDay = startDate.getDate();
+	var endYear = endDate.getFullYear();
+	var endMonth = endDate.getMonth();
+	var endDay = endDate.getDate()+1;
+	sales.aggregate([
+		{$project:{_id:0, ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1}},
+		{$match: {ID: ID, Date: {"$gte": new Date(startYear, startMonth, startDay), "$lt": new Date(endYear, endMonth, endDay)}}},
+		{$lookup: {from:"accounts", localField:"ID", foreignField:"ID", as: "accounts"}},
+		{$unwind: {path:"$accounts"}},
+		{$project:{_id:0, ID:1, icID:1, Date:1, Type:1, Shift:1, Location:1, Demo:1, Close: 1, UpSale:1, DownSale:1, LB:1, MG:1, DP:1, CG:1, IO:1, SY:1, RO:1, TB:1, EDT:1, Cash:1, Nets:1, "accounts.firstName":1, "accounts.lastName":1, "accounts.seniorTeam":1 }}
+	], function(err, data){
+		if (err) return cb(err);
+        cb(null, data);
+	});
+};
+
 
 exports.test = function(cb){
 	sales.find({Date: {$dayOfWeek: 4}}, function(err, docs){
@@ -128,4 +202,43 @@ exports.test = function(cb){
 	});
 };
 
+exports.searchSales = function(conditions, cb){ 
+	sales.aggregate([
+		{$match:conditions}
+	], function(err, data){
+		if (err) return cb(err);
+		cb(null, data);
+	});
+};
+
+exports.findPB = function(ID, cb){
+	sales.aggregate([
+		{$project: {_id:0, ID:1, LB:1}},
+		{$match: {ID:ID}},
+		{$group: {_id: null, PB: {$max:"$LB"}}}
+	], function(err, data){
+		if (err) return cb(err);
+		cb(null, data);
+	});
+};
+
+exports.findTotals = function(ID, cb){
+	sales.aggregate([
+		{$project: {_id:0, ID:1, Demo:1, Close:1, LB:1}},
+		{$match: {ID: ID}},
+		{$group: {_id: null, totalDemo:{$sum: "$Demo"}, totalClose:{$sum:"$Close"}, totalBag:{$sum:"$LB"}}}
+	], function(err, data){
+		if (err) return cb(err);
+		cb(null, data);
+	});
+};
+
+exports.findBagsWeek = function(ID, cb){
+	sales.aggregate([
+		{$project: {_id:0, ID:1, LB:1, Date:1, week:{$week:"$Date"}}}  //WTF DAYS OF WEEK???
+	], function(err, data){
+		if (err) return cb(err);
+		cb(null, data);
+	});
+};
 

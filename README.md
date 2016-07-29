@@ -17,7 +17,7 @@
   ```
   npm install -g nodemon
   ```
-2. **Install node packages:** Go to the highroll project folder directory
+2. **Install node packages:** Go to the absolute project folder directory
 
   ```
   npm install .
