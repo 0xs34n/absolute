@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="/libs/jquery-3.0.0.min.js"></script>
+
+        <!-- Semantic UI -->
+        <link rel="stylesheet" href="/libs/semantic/semantic.min.css">
+        <script type="text/javascript" src="/libs/semantic/semantic.min.js"></script>
+
+    </head>
+    <body>
+
+        <!-- Container -->
+        <div class="ui container">
+            <!-- Title -->
+            <h1 class="ui center aligned icon header" style="margin-top: 50px">
+                <img src="/images/absolute.png">
+                <!-- Trophy Icon -->
+                <i class="yellow trophy icon"></i>
+                <!-- Text title & description -->
+                <div class="content">
+                  <!-- Text title -->
+                  Leaderboard
+                  <!-- Description -->
+                  <div class="sub header">Race to the top!</div>
+                </div>
+            </h1>
+
+            <!-- Calendar Options -->
+            <div class="ui teal inverted compact menu">
+
+                <a class="item">Day</a>
+                <a class="item active">Week</a>
+                <a class="item">Month</a>
+                <a class="item">Year</a>
+            </div>
+
+            <% include week.ejs %>
+        </div>
+    </body>
+</html>

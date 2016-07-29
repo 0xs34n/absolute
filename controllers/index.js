@@ -10,5 +10,9 @@ router.use('/tracker', require('./tracker'));
 router.get('/', function(req, res){
 	res.render('./login');
 });
-	
+
+router.get('/salestracker', function(request, response) {
+	response.render('./new/sales_tracker');
+});
+
 module.exports = router;
